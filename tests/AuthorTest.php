@@ -105,7 +105,7 @@
         function test_update()
         {
             $author_name = "King";
-            $id = 2;
+            $id = null;
             $new_author = new Author($author_name, $id);
             $new_author->save();
             $new_author_name = "Stephen";
@@ -115,6 +115,25 @@
             $result = $new_author->getAuthorName();
 
             $this->assertEquals($new_author_name, $result);
+        }
+
+        function test_delete()
+        {
+            $author_name = "King";
+            $id = null;
+            $new_author = new Author($author_name, $id);
+            $new_author->save();
+
+            $author_name2 = "Bacon";
+            $id2 = null;
+            $new_author2 = new Author($author_name2, $id2);
+            $new_author2->save();
+
+            $new_author->delete();
+
+            $result = Author::getAll();
+
+            $this->assertEquals([$new_author2], $result);
         }
     }
 ?>

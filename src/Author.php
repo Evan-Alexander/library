@@ -69,6 +69,12 @@
             $this->setAuthorName($new_name);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()}");
+            
+        }
+
     }
 
 ?>
