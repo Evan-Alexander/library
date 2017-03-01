@@ -25,6 +25,7 @@
             return $this->id;
         }
 
+        // CRUD
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO authors (author_name) VALUES ('{$this->getAuthorName()}');");

@@ -15,6 +15,10 @@
 
     class BookTest extends PHPUnit_Framework_TestCase
     {
+        function tearDown()
+        {
+            Book::deleteAll();
+        }
 
         function test_getBookName()
         {
@@ -39,6 +43,7 @@
             $this->assertEquals($name2, $result);
         }
 
+        // CRUD
         function test_getBookId()
         {
             $name = "The shadow of the wing";
@@ -48,6 +53,37 @@
             $result = $new_book->getBookId();
 
             $this->assertEquals($id, $result);
+        }
+
+        function test_save()
+        {
+            $name = "Runnin away form Epicodus";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $result = Book::getAll();
+
+            $this->assertEquals([$new_book], $result);
+        }
+
+        function test_deleteAll()
+        {
+            $name = "PHP for single grandmas with dependent kids";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $name2 = "PHP for dummies";
+            $id2 = null;
+            $new_book2 = new Book($name2, $id2);
+            $new_book2->save();
+
+            Book::deleteAll();
+            $result = Book::getAll();
+            $this->assertEquals([], $result);
+
+
         }
     }
 
