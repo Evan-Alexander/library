@@ -82,8 +82,56 @@
             Book::deleteAll();
             $result = Book::getAll();
             $this->assertEquals([], $result);
+        }
 
+        function test_find()
+        {
+            $name = "Epicodus documentation";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
 
+            $name2 = "Felix documentation";
+            $id2 = null;
+            $new_book2 = new Book($name2, $id2);
+            $new_book2->save();
+
+            $result = Book::find($new_book2->getBookId());
+
+            $this->assertEquals($new_book2, $result);
+        }
+
+        function test_update()
+        {
+            $name = "Epicodus documentation";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $new_name = "Epicodus manual for dummies";
+
+            $new_book->update($new_name);
+            $result = $new_book->getBookName();
+
+            $this->assertEquals($new_name, $result);
+        }
+
+        function test_delete()
+        {
+            $name = "Epicodus documentation";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $name2 = "Felix documentation";
+            $id2 = null;
+            $new_book2 = new Book($name2, $id2);
+            $new_book2->save();
+
+            $new_book->delete();
+            $result = Book::getAll();
+
+            $this->assertEquals([$new_book2], $result);
         }
     }
 
