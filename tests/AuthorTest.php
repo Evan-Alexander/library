@@ -84,5 +84,37 @@
 
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            $author_name = "King";
+            $id = null;
+            $new_author = new Author($author_name, $id);
+            $new_author->save();
+
+            $author_name2 = "Kong";
+            $id2 = 1;
+            $new_author2 = new Author($author_name2, $id2);
+            $new_author2->save();
+
+            $result = Author::find($new_author2->getId());
+
+            $this->assertEquals($new_author2, $result);
+        }
+
+        function test_update()
+        {
+            $author_name = "King";
+            $id = 2;
+            $new_author = new Author($author_name, $id);
+            $new_author->save();
+            $new_author_name = "Stephen";
+
+
+            $new_author->update($new_author_name);
+            $result = $new_author->getAuthorName();
+
+            $this->assertEquals($new_author_name, $result);
+        }
     }
 ?>
