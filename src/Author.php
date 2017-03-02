@@ -72,7 +72,31 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()}");
-            
+
+        }
+
+        function addBook($book)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getBookId()});");
+        }
+
+        function getBooks()
+        {
+            $query = $GLOBALS['DB']->query("SELECT book_id FROM authors_books WHERE author_id = {$this->getId()};");
+            $book_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $books = array();
+            foreach($book_ids as $id){
+                $book_id = $id['book_id'];
+                $result = $GLOBALS['DB']->query("SELECT * FROM books WHERE id = {$book_id};");
+                $returned_book = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                $book_name = $returned_book[0]['book_name'];
+                $id = $returned_book[0]['id'];
+                $new_book = new Book($book_name, $id);
+                array_push($books, $new_book);
+            }
+            return $books;
         }
 
     }
