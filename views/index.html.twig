@@ -1,0 +1,31 @@
+{{ include('base.html.twig') }}
+
+<body>
+    <div class="container">
+        <h1>Welcome Oporto Public Library</h1>
+
+        {% if books is not empty %}
+        <p>Here are all your books:</p>
+        <ul>
+            {% for book in books %}
+            <li><a href="/books/{{ book.getBookId }}">{{ book.getBookName }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action='/' method='post' class="form-group">
+            <label for='name'>Book name</label>
+            <input id='name' name='name' type='text' class="form-control" required="">
+
+            <label for="author">Author Name</label>
+            <input id="author" type="text" name="author" class="form-control" required="">
+
+            <button type='submit' class="btn btn-lg btn-success">Add</button>
+        </form>
+        <form action='/delete_books' method='post'>
+            <button type='submit' class="btn btn-md btn-danger">Clear</button>
+        </form>
+
+    </div>
+
+</body>
