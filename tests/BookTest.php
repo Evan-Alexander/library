@@ -133,6 +133,49 @@
 
             $this->assertEquals([$new_book2], $result);
         }
+
+
+        function test_addAuthor()
+        {
+            $name = "Epicodus documentation";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $name = "Felix master Writer";
+            $id = null;
+            $new_author = new Author($name, $id);
+            $new_author->save();
+
+            $new_book->addAuthor($new_author);
+
+            $this->assertEquals($new_book->getAuthors(), [$new_author]);
+        }
+
+        function test_getAuthors()
+        {
+            $name = "Epicodus documentation";
+            $id = null;
+            $new_book = new Book($name, $id);
+            $new_book->save();
+
+            $name = "Felix master Writer";
+            $id = null;
+            $new_author = new Author($name, $id);
+            $new_author->save();
+
+            $name2 = "Gustavo Adolfo Bequer";
+            $id2 = null;
+            $new_author2 = new Author($name2, $id2);
+            $new_author2->save();
+
+            $new_book->addAuthor($new_author);
+            $new_book->addAuthor($new_author2);
+
+            $this->assertEquals($new_book->getAuthors(), [$new_author, $new_author2]);
+
+
+        }
     }
 
 ?>
