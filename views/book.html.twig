@@ -1,0 +1,23 @@
+{{ include('base.html.twig') }}
+
+<body>
+        <div class="container">
+            <h1>Edit {{ book.getBookName }} info:</h1>
+            <div class="well">
+                <form name="new-title" action="/books/{{ book.getBookId }}" method="post">
+                    <input name="_method" type="hidden" value = "patch">
+                    <input id="id" type="hidden" name="id" value="{{ book.getBookId() }}">
+                    <label for="new-title">Edit book name</label>
+                    <input id="new-title" type="text" name="new-title" class="form-control">
+
+                    <button class="btn btn-info add" type="submit" name="button">Update</button>
+                </form>
+                <!-- <form class="form-group" action="/delete_book/{{book.getBookId}}"  method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button id="delete" class="btn btn-danger" type="submit" name="button">Delete this book</button>
+                </form> -->
+
+            </div>
+            <li class="return"><a  href="/">Return to a list of authors</a></li>
+        </div>
+    </body>
