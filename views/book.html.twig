@@ -12,12 +12,24 @@
 
                     <button class="btn btn-info add" type="submit" name="button">Update</button>
                 </form>
-                <!-- <form class="form-group" action="/delete_book/{{book.getBookId}}"  method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <button id="delete" class="btn btn-danger" type="submit" name="button">Delete this book</button>
-                </form> -->
+
+                <form class="" action="/update/{{ book.getBookId }}" method="post">
+                    <label for="add-author">Add a co-author to {{ book.getBookName }}</label>
+                    <input class="form-control" type="text" name="add-author">
+
+                    <button class="btn btn-info add" type="submit" name="button">Update</button>
+                </form>
+
+                    <p>
+                        {{ book.getBookName }}
+                    </p>
+                    <ul>
+                        {% for author in authors %}
+                            <li>{{ author.getAuthorName }}</li>
+                        {% endfor %}
+                    </ul>
 
             </div>
-            <li class="return"><a  href="/">Return to a list of authors</a></li>
+            <li><a  href="/">Return to a list of books</a></li>
         </div>
     </body>
