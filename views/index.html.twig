@@ -10,6 +10,16 @@
             {% for book in books %}
             <li><a href="/books/{{ book.getBookId }}">{{ book.getBookName }}</a></li>
             {% endfor %}
+
+        </ul>
+        {% endif %}
+
+        {% if authors is not empty %}
+        <p>Here are all your authors:</p>
+        <ul>
+        {% for author in authors %}
+        <li><a href="/authors/{{ author.getId }}">{{ author.getAuthorName }}</a></li>
+        {% endfor %}
         </ul>
         {% endif %}
 

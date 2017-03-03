@@ -20,9 +20,7 @@
                     <button class="btn btn-info add" type="submit" name="button">Update</button>
                 </form>
 
-                    <p>
-                        {{ book.getBookName }}
-                    </p>
+                    <p>Author(s)</p>
                     <ul>
                         {% for author in authors %}
                             <li>{{ author.getAuthorName }}</li>
@@ -30,6 +28,6 @@
                     </ul>
 
             </div>
-            <li><a  href="/">Return to a list of books</a></li>
+            <li><a  href="/">Home</a></li>
         </div>
     </body>

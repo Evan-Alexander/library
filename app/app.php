@@ -58,7 +58,25 @@
         $book = Book::find($id);
         $book->addAuthor($new_author);
         return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'all_authors' => Author::getAll()));
+    });
 
+    $app->get("authors/{id}", function($id) use ($app) {
+        $author = Author::find($id);
+        return $app['twig']->render('author.html.twig', array('author' => $author, 'books' => $author->getBooks(), 'all_books' => Book::getAll()));
+    });
+
+    $app->patch("/authors/{id}", function($id) use ($app) {
+        $author = Author::find($id);
+        $author->update($_POST['new-author']);
+        return $app['twig']->render('author.html.twig', array('author' => $author, 'books' => $author->getBooks(), 'all_bookss' => Book::getAll()));
+    });
+
+    $app->post("/update-author/{id}", function($id) use ($app) {
+        $new_book = new Book($_POST['add-book']);
+        $new_book->save();
+        $author = Author::find($id);
+        $author->addBook($new_book);
+        return $app->redirect('/authors/'. $id);
     });
 
     return $app;

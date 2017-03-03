@@ -1,0 +1,33 @@
+{{ include('base.html.twig') }}
+
+<body>
+        <div class="container">
+            <h1>Edit {{ author.getAuthorName }} info:</h1>
+            <div class="well">
+                <form name="new-author" action="/authors/{{author.getId}}" method="post">
+                    <input name="_method" type="hidden" value = "patch">
+                    <input id="id" type="hidden" name="id" value="{{ author.getId() }}">
+                    <label for="new-author">Edit author name</label>
+                    <input id="new-author" type="text" name="new-author" class="form-control">
+
+                    <button class="btn btn-info add" type="submit" name="button">Update</button>
+                </form>
+
+                <form class="" action="/update-author/{{ author.getId }}" method="post">
+                    <label for="add-book">Add a book to {{ author.getAuthorName }}</label>
+                    <input class="form-control" type="text" name="add-book">
+
+                    <button class="btn btn-info add" type="submit" name="button">Update</button>
+                </form>
+
+                    <p>Book(s) by {{ author.getAuthorName }}</p>
+                    <ul>
+                        {% for book in books %}
+                            <li>{{ book.getBookName }}</li>
+                        {% endfor %}
+                    </ul>
+
+            </div>
+            <li><a  href="/">Home</a></li>
+        </div>
+    </body>
